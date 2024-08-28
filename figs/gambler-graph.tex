@@ -1,0 +1,30 @@
+\begin{tikzpicture}
+	\begin{semilogxaxis}[
+		axis lines=middle,
+		axis x line=bottom,  
+		axis y line=left,
+		xlabel=$\alpha$,
+		ylabel=$m$,
+		xmin=0.20, xmax=5,
+		domain=0.20:5,
+		xticklabels={0.25,0.5,1,2,4, 5},
+		xtick={0, 0.25,0.5,1,2,4, 5},
+		ymin=0, ymax=60,
+		extra y ticks ={20,40,60},
+		extra y tick labels ={20,40,60},
+		grid=major,
+	]
+
+	\addplot[mark=*, mark size=2pt, teal, mark color=teal] coordinates {
+		(0.25, 38)
+		(0.33, 43)
+		(0.5, 48)
+		(1, 56)
+		(2, 33)
+		(3, 26)
+		(4, 23)
+	};
+
+	\end{semilogxaxis}
+
+\end{tikzpicture}

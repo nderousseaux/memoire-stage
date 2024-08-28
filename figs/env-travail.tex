@@ -1,0 +1,28 @@
+\sbox0{\begin{tabular}{rl}
+		\tikz{\node[fill=red!40, draw=black, inner sep=1ex]{};} & IMT Atlantique\\
+		\tikz{\node[fill=green!40, draw=black, inner sep=1ex]{};} & SRCD\\
+		\tikz{\node[fill=blue!40, draw=black, inner sep=1ex]{};} & SOTERN\\
+		\tikz{\node[shape=circle, dotted, line width=2pt, draw=black, inner sep=0.5ex]{};} & BC4SSI
+	\end{tabular}}
+
+\begin{tikzpicture}[scale=1]
+		\begin{scope}[shift={(3cm,-5cm)}, fill opacity=1]
+				
+				% Ellipses
+				\draw[fill=red!40, draw=black] (0,0) circle (4);
+				\draw[fill=green!40, draw=black] (0.5,0) circle (3.5);
+				\draw[fill=blue!40, draw=black] (1,0) circle (3);
+				\draw[draw=black, dotted, line width=2pt] (4,0) ellipse (5.5 and 2.3);
+		
+				% Noms
+				\node at (1.5,1) (r) {\small \textbf{Romaric Ludinard}};
+				\node at (1.5,0.5) (l) {\small \textbf{Loïc Miller}};
+				\node at (1.5,0) (d) {\small\textbf{Dorian Pacaud}};
+				\node at (1.5,-0.5) (n) {\small \textbf{Nathanaël Derousseaux}};
+				\node at (6.7,0) (e) {\small \textbf{Emmanuelle Anceaume}};
+				
+				% Légende
+				\node[below=1cm, draw, rounded corners] at (7.5,6) {\usebox0};
+		\end{scope}
+
+\end{tikzpicture}

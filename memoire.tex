@@ -1,0 +1,113 @@
+\documentclass[twoside,openright,a4paper,11pt,french] {report}
+
+    % Packages
+    % Règles de typographie françaises
+    \usepackage[french]{babel}
+
+    % Jeu de caractères UTF-8
+    \usepackage[utf8]{inputenc}
+    \usepackage[T1]{fontenc}
+
+    % Inclure la bibliographie dans la table des matières comme une section
+    \usepackage[numbib, nottoc] {tocbibind}	% numbib : section numérotée
+
+    % Fonte élégante
+    \usepackage{mathpazo}
+    \usepackage[scaled] {helvet}
+    \usepackage{courier}
+
+    % pour certains symboles mathématiques peu fréquents, dont \square
+    \usepackage{amssymb, amsfonts, amsmath, mathtools}
+
+    % pour \EUR
+    \usepackage{marvosym}
+
+    % Utilisation de tableaux
+    \usepackage{tabularx}
+    
+    % Utilisation d'url
+    \usepackage[hidelinks]{hyperref}
+    \urlstyle{sf}
+
+    % Utilisation d'images
+    \usepackage{graphicx}
+    \setkeys{Gin} {keepaspectratio}	% par défaut : conserver les proportions
+
+    % Utilisation de TikZ
+    \usepackage{tikz}
+    \usepackage{pgfplots}
+    \pgfplotsset{compat=1.16}
+    \usetikzlibrary{calc}
+
+    % Utilisation des algorithmes
+    \usepackage[linesnumbered,lined,boxed,commentsnumbered]{algorithm2e}
+
+    % Définition des marges
+    \usepackage[margin=25mm, foot=15mm] {geometry}
+
+    % Utilisation de lipsum
+    \usepackage{lipsum}
+
+    % Utilisation des espaces
+    \usepackage{setspace}
+
+
+    % Définition des écarts
+
+    % Écart entre les paragraphes
+    \parskip=4mm
+    \parindent=0mm
+
+    % On enlève le saut de ligne quand on écrit des équations en inline
+    \lineskiplimit=-\maxdimen%
+
+
+    % On redéfini l'écart au dessus des paragraphes
+    \renewcommand\paragraph[1]{\smallskip\noindent\textbf{#1}}
+
+    % Le style de la page sera plain
+    \pagestyle{plain}
+
+    \raggedbottom
+
+    \author{Nathanaël Derousseaux--Lebert}
+    \title{Mémoire de stage}
+
+\begin{document}
+
+    % Page de garde
+    \include{pages/garde}
+    \cleardoublepage%
+
+    % Table des matières
+    \include{pages/matieres}
+    \cleardoublepage%
+
+    % Introduction
+    \include{pages/introduction}
+
+    % Contexte
+    \include{pages/contexte}
+
+    % État de l'art
+    \include{pages/etat_art}
+
+    % Réalisation
+    \include{pages/realisations}
+
+    % Conclusion
+    \include{pages/conclusion}
+    \cleardoublepage%
+
+    % Annexes
+    \appendix
+
+    \include{pages/notations}
+
+    \include{pages/algos}
+
+    % Bibliographie
+    \include{pages/biblio}
+
+
+\end{document}

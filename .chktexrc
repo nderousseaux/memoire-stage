@@ -1,0 +1,2 @@
+% Disable double dash warning
+W1 {double-dash}

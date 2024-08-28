@@ -1,0 +1,154 @@
+\chapter{Algorithmes}\label{chap:algos}
+
+\section{Algorithmes MLS dans le cas statique}\label{sec:mls_algo}
+
+	\begin{algorithm}[htb!]\label{algo:mls_compress}
+
+		\SetKwFunction{FDissolve}{Dissolve$_{m,k}$}
+		\SetKwProg{Fn}{function}{}{}
+		\SetKwFunction{FCompress}{Compress$_{m,k}$}
+
+		\Fn{\FDissolve{$\mathcal{C}$}}{
+			
+			$\mathcal{C}^* \gets C[:-k]$\\
+			$\mathcal{D} \gets \emptyset$
+			
+			\uIf {$|\mathcal{C}^*| \geq 2m$}{
+				$\ell \gets \textrm{max}\{\mu : |\mathcal{C}^*\uparrow^\mu| \geq 2m\}$\\
+				$\mathcal{D} \gets \mathcal{C}^*\uparrow^\ell$ \\
+				\For {$\mu \gets \ell-1$ \KwTo $0$}{
+					$b \gets \mathcal{C}^*\uparrow^{\mu+1}[-m]$\\
+					$\mathcal{D}[\mu] \gets
+						\mathcal{C}^*\uparrow^\mu [-2m:] \cup
+						\mathcal{C}^*\uparrow^{\mu} \{b:\}$
+				}				
+			}
+			\Else{
+				$\mathcal{D}[0] \gets \mathcal{C}^*$
+			}
+			$\chi \gets \mathcal{C}[-k:]$\\
+			\Return $(\mathcal{D}, \ell, \chi)$
+		}
+
+		\Fn{\FCompress{$\mathcal{C}$}}{
+			$(\mathcal{D}, \ell, \chi) \gets \FDissolve{$\mathcal{C}$}$\\
+			$\pi \gets \bigcup_{\mu=0}^{\ell} \mathcal{D}[\mu]$\\
+			\Return $\pi \chi$
+		}
+		\caption{Algorithme de compression MLS dans le cas statique}
+	\end{algorithm}
+
+
+\newpage
+
+	\begin{algorithm}[htb!]\label{algo:mls_compare}
+		\SetKwFunction{FCompare}{maxvalid$_{m,k}$}
+		\SetKwProg{Fn}{function}{}{}
+		\SetKwFunction{FDissolve}{Dissolve$_{m,k}$}
+		
+		\Fn{\FCompare{$\Pi, \Pi'$}}{
+			\If {$\Pi$ is not valid}{
+				\Return $\Pi'$
+			}
+			\If {$\Pi'$ is not valid}{
+				\Return $\Pi$
+			}
+			$(\chi, \ell, \mathcal{D}) \gets \FDissolve{$\Pi$}$\\
+			$(\chi', \ell', \mathcal{D}') \gets \FDissolve{$\Pi'$}$\\
+			$M \gets \{\mu \in \mathbb{N}: \mathcal{D}[\mu] \cap \mathcal{D}'[\mu] \neq \emptyset\}$\\
+
+			\If {$M = \emptyset$}{
+				\If {$\ell' > \ell$}{
+					\Return $\Pi'$
+				}
+				\Return $\Pi$
+			}
+			$\mu \gets \textrm{min}(M)$\\
+			$b \gets (\mathcal{D}[\mu] \cap \mathcal{D}'[\mu])[-1]$\\
+			\If {$|\mathcal{D}'[\mu]{b:}| > |\mathcal{D}[\mu]{b:}|$}{
+				\Return $\Pi'$
+			}
+			\Return $\Pi$
+		}
+		\caption{Algorithme de comparaison MLS dans le cas statique}
+	\end{algorithm}
+
+
+\section{Algorithmes MLS dans le cas dynamique}\label{sec:mls_dyn_algo}
+
+	\begin{algorithm}[htb!]\label{algo:mls_dyn_compress}
+		
+		\SetKwFunction{FDissolve}{Compress$_{m,k}$}%
+		\SetKwProg{Fn}{function}{}{}
+
+		\Fn{\FDissolve{$\mathcal{C}$}}{
+			$\mathcal{D} \gets \emptyset$\\
+			$\chi \gets \mathcal{C}[-k:]$\\
+			$\mathcal{C}^* \gets \mathcal{C}[:-k]$\\
+			\uIf{$|\mathcal{C}^*| \geq 2m$}{
+				$\ell \gets \textrm{max}\{\mu : |\mathcal{C}^*\uparrow^\mu| \geq 2m\}$\\
+				$\mathcal{D}[\ell] \gets \mathcal{C}^*\uparrow^\ell$\\
+				\For{$\mu \gets \ell-1$ \KwTo $0$}{
+					$b^* \gets \mathcal{C}^*\uparrow^{\mu+1}[-m]$\\
+					$\mathcal{D}[\mu] \gets
+						\mathcal{C}^*\uparrow^\mu[-2m:] \cup
+						\mathcal{C}^*\uparrow^{\mu}\{b^*:\}$
+				}
+			}
+			\Else{
+				$\ell \gets 0$\\
+				$\mathcal{D}[0] \gets \mathcal{C}^*$
+			}
+			\Return $(\mathcal{D}, \ell, \chi)$
+		}
+		\caption{Algorithme de compression MLS dans le cas dynamique}		
+	\end{algorithm}
+
+	\begin{algorithm}[htb!]\label{algo:mls_dyn_compare}
+		\SetKwFunction{FCompare}{maxvalid$_{m,k}$}
+		\SetKwProg{Fn}{function}{}{}
+		\SetKwFunction{FValid}{valid}
+		\SetKwFunction{FScore}{score}
+
+		\Fn{\FCompare{$\Pi_1, ..., \Pi_n$}}{
+			\textmd{candidates} $\gets \emptyset$\\
+			$(\mathcal{D}, \chi, \ell) \gets \bot$\\
+			$i \gets 0$\\
+			\While{$(\mathcal{D}, \chi, \ell)$ \textbf{is} $\bot$ \textbf{and} $i \leq n$}{
+				\If{\FValid{$\Pi_i$}}{
+					$(\mathcal{D}, \chi, \ell) \gets \FDissolve{$\Pi_i$}$\\
+					\textmd{candidates} $\gets$ \textmd{candidates} $\cup \{(\mathcal{D}, \chi, \ell)\}$
+				}
+				$i \gets i+1$
+			}
+			\If{$\neg ((\mathcal{D}, \chi, \ell)$ \textbf{is} $\bot)$}{
+				\For{$j \gets i$ \textbf{to} $n$}{
+					\If{\FValid{$\Pi_j$}}{
+						$(\mathcal{D}', \chi', \ell') \gets \FDissolve{$\Pi_j$}$\\
+						$M \gets \{\mu \in \mathbb{N} \mid \mathcal{D}[\mu] \cap \mathcal{D}'[\mu] \neq \emptyset\}$\\
+						\uIf{$M = \emptyset$}{
+							\textmd{candidates} $\gets$ \textmd{candidates} $\cup \{(\mathcal{D}', \chi', \ell')\}$
+						}
+						\Else{
+							$\mu \gets \min M$\\
+							$b \gets (\mathcal{D}[\mu] \cap \mathcal{D}'[\mu])[-1]$\\
+							\If{\FScore{$\mathcal{D}'\{b:\} \cdot \chi'$} $\geq$ \FScore{$\mathcal{D}\{b:\} \cdot \chi$}}{
+								$(\mathcal{D}, \chi, \ell) \gets (\mathcal{D}', \chi', \ell')$
+							}
+						}
+					}
+				}
+			}
+			\uIf{$|\textmd{candidates}| = 1$}{
+				\textmd{best} $\gets (\mathcal{D}, \chi, \ell)$
+			}
+			\Else{
+				\textmd{best} $\gets \bot$\\
+				\textmd{beacon} $\gets$ \textmd{generate\_beacon()}\\
+				\textmd{send\_tx\_beacon}(\textmd{beacon})
+			}
+			\Return \textmd{best}
+		}
+		\caption{Algorithme de comparaison MLS dans le cas dynamique}
+
+	\end{algorithm}

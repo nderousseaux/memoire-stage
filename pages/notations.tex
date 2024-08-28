@@ -1,0 +1,137 @@
+\chapter{Rappel des notations}\label{chap:notations}
+
+\newcolumntype{M}[1]{>{\raggedright}m{#1}}
+
+\begin{table}[htb!]
+	\centering
+	\begin{tabular}{|c||M{13cm}|}
+		\hline
+			\textbf{Notations} & \textbf{Signification} \tabularnewline
+		\hline
+			$\mathcal{C}$ & Chaîne de blocs \tabularnewline
+			$h$ & Header d'un bloc. \tabularnewline
+			$d$ & Données applicatives d'un bloc. \tabularnewline
+			$c$ & Nonce d'un bloc. \tabularnewline
+			$\mathfrak{h}(\cdot)$ & Fonction de hashage. \tabularnewline
+			$\kappa$ & Nombre de bit en sortie de la fonction de hashage. \tabularnewline
+			$T$ & Target de la PoW ($T_b$ la target honnête et $T_m$
+			la target adversariale). \tabularnewline
+			$D$ & Difficulté de la PoW (telle que $D = 1/T$). \tabularnewline
+			$k$ & Nombre de blocs à tronquer à chaque chaîne honnête pour obtenir un
+			préfixe commun. \tabularnewline
+		\hline
+	\end{tabular}
+	\caption{Tableau récapitulatif des notations relatives à la structure de la
+	chaîne (\textit{sec. \ref{sec:blockchain}})}
+	\label{tab:notations-structure}
+\end{table}
+
+
+\begin{table}[htb!]
+	\centering
+	\begin{tabular}{|c||M{13cm}|}
+		\hline
+			\textbf{Notations} & \textbf{Signification} \tabularnewline
+		\hline
+			$q$ & Proportion de 	puissance de calcul de l'adversaire. \tabularnewline
+			$p$ & Proportion de puissance de calcul de l'honnête. \tabularnewline 
+			$n$ & Nombre total de nœuds du réseau. \tabularnewline
+			$t$ & Nombre de nœuds malveillants. \tabularnewline
+			$r$ & Nombre de requêtes à la fonction de hashage par ronde et par nœud.
+			\tabularnewline 
+			$P_T$ & Probabilité de trouver un bloc en une seule requête avec une target.
+			$T$ ($P_b$ avec la target de l'honnête et $P_m$ avec la target.
+			\tabularnewline
+			$f$ & Probabilité qu'au moins un nœud honnête trouve un bloc en une ronde.
+			\tabularnewline
+			$D(\cdot)$ & Fonction de recalcul de la difficulté. \tabularnewline
+			$X_i$ & Variable aléatoire, vaut 1 si au moins un nœud honnête à trouvé un
+			bloc à la ronde $i$. \tabularnewline
+			$Y_i$ & Variable aléatoire, vaut 1 si un seul nœud honnête à trouvé un 
+			bloc à la ronde $i$ .\tabularnewline
+			$Z_i$ & Variable aléatoire, vaut 1 si au moins un nœud malveillant à
+			trouvé un bloc à la ronde $i$. \tabularnewline
+			$\varepsilon$ & Paramètre de sécurité. \tabularnewline
+			$\Lambda$ & Nombre de rondes minimum à considérer avant de pouvoir parler
+			d'exécution typique. \tabularnewline
+			$\tau$ & Facteur limitant la variation de $T$ entre deux epochs.
+			\tabularnewline
+			$(\eta, \theta)$ & Bornes  de variation de $T$ entre deux nœuds à la même
+			epoch. \tabularnewline
+			$(\gamma, s)$ & Paramètres limitant la variation de la population du
+			système entre deux rondes. \tabularnewline
+			$L$ & Nombre de rondes depuis le début du protocole. \tabularnewline
+			$J$ & Nombre de blocs par epoch. \tabularnewline
+		\hline
+	\end{tabular}
+	\caption{Tableau récapitulatif des notations relatives aux modèles backbone
+	(\textit{sec. \ref{sec:statique} et \ref{sec:dynamic}})}
+	\label{tab:notations-modeles}
+\end{table}
+
+
+\begin{table}[htb!]
+	\centering
+	\begin{tabular}{|c||M{13cm}|}
+		\hline
+			\textbf{Notations} & \textbf{Signification} \tabularnewline
+		\hline
+			$l$ & Niveau d'un bloc. \tabularnewline
+			$m$ & Paramètre de l'algorithme MLS. \tabularnewline		
+			$\alpha$ & Rapport entre la target de l'adversaire et celle de l'honnête
+			(tel que $T_b = \alpha T_m$). \tabularnewline
+			$\mu(\alpha)$ & Probabilité qu'un bloc trouvé appartienne à l'adversaire.
+			\tabularnewline
+			$P_{\text{gagne}}(m)$ & Probabilité pour l'adversaire de rattraper son
+			retard de $m$ blocs. \tabularnewline
+		\hline
+	\end{tabular}
+	\caption{Tableau récapitulatif des notations relatives à MLS (\textit{sec.
+	\ref{sec:mls}, \ref{sec:mls_dynamic} et \ref{sec:probabilite-bloc}})}
+	\label{tab:notations-mls}
+\end{table}
+
+
+\begin{table}[htb!]
+	\centering
+	\begin{tabular}{|c||M{13cm}|}
+		\hline
+			\textbf{Notations} & \textbf{Signification} \tabularnewline
+		\hline			
+			$V_k$ & Nombre de victoire à la $k$-ième partie. \tabularnewline
+			$A_b$ & Nombre de parties gagnées par l'honnête. \tabularnewline
+			$A_m$ & Nombre de parties gagnées par l'adversaire. \tabularnewline
+			$\mathcal{M}$ & Espace du quart de plan ou l'adversaire à gagné.
+			\tabularnewline
+			$\mathcal{B}$ & Espace du quart de plan ou l'honnête à gagné.
+			\tabularnewline
+		\hline
+	\end{tabular}
+	\caption{Tableau récapitulatif des notations relatives à la marche aléatoire
+	(\textit{sec. \ref{sec:recherche-m-alea}})}
+	\label{tab:notations-walk}
+\end{table}
+
+\newpage
+
+\begin{table}[t!]
+	\centering
+	\begin{tabular}{|c||M{13cm}|}
+		\hline
+			\textbf{Notations} & \textbf{Signification} \tabularnewline
+		\hline
+			$a$ & Perte de l'adversaire. \tabularnewline
+			$b$ & Gain de l'adversaire.\tabularnewline
+			$p(z)$ & Espérance de gain du joueur.\tabularnewline
+			$\eta$ & Nombre de racines de $p(z)$.\tabularnewline
+			$\nu_i$ & $i$-ème racine de $p(z)$. \tabularnewline
+			$P_{\text{ruin}}(M)$ & Probabilité pour le joueur d'être ruiné en
+			possédant une fortune de $M$. \tabularnewline
+		\hline
+	\end{tabular}
+	\caption{Tableau récapitulatif des notations relatives à la ruine du joueur
+	(\textit{sec. \ref{sec:recherche-m-gamblers-ruin}})}
+	\label{tab:notations-gambler}
+	\vspace*{7in}
+	% \vfill
+\end{table}
